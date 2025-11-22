@@ -7,10 +7,11 @@ using namespace std;
 void create_file(string file_name) {
     fstream datei_1(file_name + ".txt", ios::out);
     cout << "datei: " << file_name << " erstellt" << endl;
+    datei_1.close();
 };
 
 void read_file(string file_name) {
-    fstream datei_1(file_name + ".txt");
+    fstream datei_1(file_name + ".txt", ios::in);
     string line;
 
     if (!datei_1) cout << "error" << endl;
@@ -21,17 +22,12 @@ void read_file(string file_name) {
     datei_1.close();
 };
 
-void write_file(string file_name) {
-    fstream datei_1(file_name + ".txt");
-    datei_1.close();
-}
-
 int main() {
-    int num;
-    cout << "main.cpp geladen" << endl << "1 - datei erstellen" << endl << "2 - datei lesen" << endl << "3 - datei neu schreiben" << endl << "4 - datei loeschen" << endl << "5 - Programm schliessen" << endl;
     
     bool running = true;
     while (running) {
+        int num;
+        cout << endl << "1 - datei erstellen" << endl << "2 - datei lesen" << endl << "3 - Programm schliessen" << endl;
         cin >> num;
         switch(num) {
             case 1: {
@@ -48,8 +44,7 @@ int main() {
                 read_file(file_name);
                 break;
             }
-            case 3: break;
-            case 4: running = false; break; 
+            case 3: running = false; break; 
         }
     }
     return 0;
