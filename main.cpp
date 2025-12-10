@@ -14,20 +14,35 @@ void read_file(string file_name) {
     fstream datei_1(file_name + ".txt", ios::in);
     string line;
 
-    if (!datei_1) cout << "error" << endl;
-
+    if (!datei_1) {
+        cout << "Datei nicht vorhanden" << endl;
+    }
     while(getline(datei_1, line)) {
         cout << line << endl;
     };
     datei_1.close();
 };
 
+void write_file(string file_name) {
+    ofstream datei_1(file_name + ".txt", ios::out);
+
+    if(!datei_1.is_open()) {
+        cout << "Datei kann nicht geöffnet werden" << endl;
+    } else {
+        cout << "Inhalt ersetzen mit: " << endl;
+        string inhalt;
+        cin >> inhalt;
+        datei_1 << inhalt;
+    }
+        datei_1.close();
+}
+
 int main() {
     
     bool running = true;
     while (running) {
         int num;
-        cout << endl << "1 - datei erstellen" << endl << "2 - datei lesen" << endl << "3 - Programm schliessen" << endl;
+        cout << endl << "1 - datei erstellen" << endl << "2 - datei lesen" << endl << "3 - datei beschreiben" << endl << "4 - Programm schliessen" << endl;
         cin >> num;
         switch(num) {
             case 1: {
@@ -44,7 +59,14 @@ int main() {
                 read_file(file_name);
                 break;
             }
-            case 3: running = false; break; 
+            case 3: {
+                string file_name;
+                cout << "datei name eingeben: " << endl;
+                cin >> file_name;
+                write_file(file_name);
+                break;
+            }
+            case 4: running = false; break; 
         }
     }
     return 0;
