@@ -66,6 +66,9 @@ int main() {
                 string file_name;
                 cout << "datei name eingeben: " << endl;
                 cin >> file_name;
+		if (file_name.length() == 0) {
+	        	cout << "datei name muss eingeben werden" << endl;
+		}
                 create_file(file_name);
                 break;
             }
